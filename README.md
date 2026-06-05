@@ -5,7 +5,8 @@ and delivery workflow for the **Fujifilm GFX Challenge**. It gives every editor 
 the project the same specs, the same export recipes, and the same handoff rules —
 from raw footage all the way to final master.
 
-🔗 **Live site:** _added after deploy — see below_
+🔗 **Live site:** https://gfx-challenge-postpro.vercel.app
+📦 **Repo:** https://github.com/totomakes/gfx-challenge-postpro
 
 ---
 
