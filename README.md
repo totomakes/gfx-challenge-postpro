@@ -12,20 +12,26 @@ from raw footage all the way to final master.
 
 ## What's in the guide
 
-The page walks the full pipeline, stage by stage:
+The page opens with **Start here** (create the project to spec before importing), the
+**core spec**, and a downloadable **Assets** pack (bug, letterbox, intro), then walks
+the four-stage workflow:
 
-| # | Stage | Who |
+| # | Stage | What happens |
 |---|-------|-----|
-| 01 | **Ingest & Proxies** — back up RAW, build Blackmagic proxies, ship proxies + sound to editors | Producer / Post-lead |
-| 02 | **Offline Edit** — cut on the spec timeline, JPG placeholders, publish review versions | Editor |
-| 03 | **Picture Lock** — image list → final images + metadata PNGs, sRGB check, XML pull | Editor + Fuji team |
-| 04 | **Audio Handoff ∥ Color** (parallel) — AAF + 1080p reference / ProRes 422 HQ color return | Editor · Sound · Color |
-| 05 | **Online / Conform** — color + audio + graphics, export for approval to Frame.io | Editor |
-| 06 | **Master & Deliver** — clean master + full master, ProRes 422 HQ | Editor |
+| 01 | **Digest** | Proxies arrive in the original folder structure; JPG placeholders; export naming by stage/status |
+| 02 | **Edit** | Status slate at the start of non-final exports; review export (4K H.264 .mov @ 20 Mbps) |
+| 03 | **Picture lock** | Image list → metadata graphics; AAF audio handoff; clean XML for color (retimes reset to 100%) |
+| 04 | **Deliver** | Two ProRes 422 HQ masters — Clean (intro/end card + photos only) and Master (everything on) |
 
-Plus reference sections: **sequence spec**, the **graphics layering stack**, copy-paste
-**export recipes** for Premiere Pro & DaVinci Resolve, a **deliverables matrix**, a suggested
+Plus a collapsible **Reference** section: graphics layering stack, copy-paste
+**export recipes** for Premiere Pro & DaVinci Resolve, a **deliverables matrix**, the
 **file-naming convention**, and a **glossary**.
+
+### Assets
+
+Web-ready brand overlays live in `assets/` and ship with the site (downloadable from the
+rail button or the Assets section): transparent `bug.png` and `letterbox.png`, the
+`GFX-CGP25-Intro.mp4`, a one-click `GFX_Brand_Assets.zip`, plus composited preview images.
 
 ### Core technical spec
 
