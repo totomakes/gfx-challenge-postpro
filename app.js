@@ -42,6 +42,36 @@
     });
   });
 
+  /* ---------- Mobile nav drawer ---------- */
+  var rail = document.getElementById("rail");
+  var toggle = document.getElementById("navToggle");
+  var backdrop = document.getElementById("railBackdrop");
+  function setNav(open) {
+    if (!rail || !toggle) return;
+    rail.classList.toggle("is-open", open);
+    toggle.classList.toggle("is-open", open);
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    toggle.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
+    if (backdrop) {
+      backdrop.classList.toggle("is-open", open);
+      backdrop.hidden = !open;
+    }
+  }
+  if (toggle) {
+    toggle.addEventListener("click", function () {
+      setNav(!rail.classList.contains("is-open"));
+    });
+  }
+  if (backdrop) backdrop.addEventListener("click", function () { setNav(false); });
+  if (rail) {
+    rail.querySelectorAll("a").forEach(function (a) {
+      a.addEventListener("click", function () { setNav(false); });
+    });
+  }
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") setNav(false);
+  });
+
   /* ---------- Scroll progress bar ---------- */
   var bar = document.getElementById("scrollProgress");
   function onScroll() {
