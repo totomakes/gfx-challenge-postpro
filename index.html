@@ -4,11 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GFX Challenge — Post-Production Delivery Guide</title>
-  <meta name="description" content="Standardized post-production & delivery workflow for the Fujifilm GFX Challenge. Specs, export recipes and handoff rules for editors working in Premiere Pro and DaVinci Resolve." />
+  <meta name="description" content="Standardized post-production & delivery workflow for the Fujifilm GFX Challenge — grouped into four stages with exact specs for Premiere Pro and DaVinci Resolve." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesque:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230b0b0d'/%3E%3Crect x='20' y='42' width='60' height='16' rx='3' fill='%23ff0a2e'/%3E%3C/svg%3E" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23ffffff'/%3E%3Crect x='20' y='42' width='60' height='16' rx='3' fill='%23e60012'/%3E%3C/svg%3E" />
+  <script>
+    /* set theme before paint to avoid flash */
+    (function(){try{var t=localStorage.getItem('gfx-theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();
+  </script>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -18,575 +22,489 @@
   <!-- ░░ MOBILE TOP BAR ░░ -->
   <header class="topbar" id="topbar">
     <a class="topbar__brand" href="#top">
-      <span class="rail__mark"></span>
+      <span class="mark"></span>
       <span>GFX<em>Challenge</em></span>
     </a>
-    <button class="topbar__burger" id="navToggle" aria-label="Open navigation" aria-expanded="false" aria-controls="rail">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="topbar__actions">
+      <button class="themebtn" data-theme-toggle aria-label="Toggle light / dark theme"></button>
+      <button class="topbar__burger" id="navToggle" aria-label="Open navigation" aria-expanded="false" aria-controls="rail">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </header>
   <div class="rail-backdrop" id="railBackdrop" hidden></div>
 
   <!-- ░░ SIDE RAIL NAV ░░ -->
   <aside class="rail" id="rail">
     <a class="rail__brand" href="#top">
-      <span class="rail__mark"></span>
+      <span class="mark"></span>
       <span class="rail__brandtext">GFX<em>Challenge</em></span>
     </a>
     <nav class="rail__nav" aria-label="Sections">
-      <a href="#flow" data-spy>00 · Overview</a>
-      <a href="#sequence" data-spy>01 · Sequence Spec</a>
-      <a href="#p-ingest" data-spy>02 · Ingest & Proxies</a>
-      <a href="#p-edit" data-spy>03 · Offline Edit</a>
-      <a href="#p-lock" data-spy>04 · Picture Lock</a>
-      <a href="#p-audio" data-spy>05 · Audio Handoff</a>
-      <a href="#p-color" data-spy>06 · Color</a>
-      <a href="#p-online" data-spy>07 · Online</a>
-      <a href="#p-master" data-spy>08 · Master & Deliver</a>
-      <a href="#graphics" data-spy>09 · Graphics Stack</a>
-      <a href="#recipes" data-spy>10 · Export Recipes</a>
-      <a href="#matrix" data-spy>11 · Deliverables</a>
-      <a href="#naming" data-spy>12 · Naming</a>
-      <a href="#glossary" data-spy>13 · Glossary</a>
+      <span class="rail__label">Guide</span>
+      <a href="#overview" data-spy>Overview</a>
+      <a href="#spec" data-spy>Core spec</a>
+      <span class="rail__label">The workflow</span>
+      <a href="#s-edit" data-spy>01 · Edit</a>
+      <a href="#s-lock" data-spy>02 · Lock &amp; Assets</a>
+      <a href="#s-finish" data-spy>03 · Finish</a>
+      <a href="#s-deliver" data-spy>04 · Deliver</a>
+      <span class="rail__label">Reference</span>
+      <a href="#graphics" data-spy>Graphics stack</a>
+      <a href="#recipes" data-spy>Export recipes</a>
+      <a href="#matrix" data-spy>Deliverables</a>
+      <a href="#naming" data-spy>Naming</a>
+      <a href="#glossary" data-spy>Glossary</a>
     </nav>
-    <p class="rail__foot">v1.0 · Post-Production Standard</p>
+    <button class="themebtn themebtn--rail" data-theme-toggle aria-label="Toggle light / dark theme">
+      <span class="themebtn__dot"></span><span class="themebtn__txt">Theme</span>
+    </button>
   </aside>
 
   <main class="stage" id="top">
 
-    <!-- ░░ HERO ░░ -->
-    <header class="hero">
+    <!-- ░░ HERO / OVERVIEW ░░ -->
+    <header class="hero" id="overview">
       <div class="hero__tag reveal">FUJIFILM · GFX CHALLENGE</div>
-      <h1 class="hero__title">
-        <span class="reveal" style="--d:.05s">Post-Production</span>
-        <span class="reveal hero__title--accent" style="--d:.12s">Delivery Guide</span>
+      <h1 class="hero__title reveal" style="--d:.06s">
+        Post-Production<br><span class="hero__title--accent">Delivery Guide</span>
       </h1>
-      <p class="hero__lede reveal" style="--d:.2s">
-        One source of truth for every editor on the project. Same specs, same exports,
-        same handoffs — from raw footage to final master. Read it before you start cutting.
+      <p class="hero__lede reveal" style="--d:.16s">
+        Everything an editor needs, grouped into four stages. Open a stage to see its
+        steps and exact export settings — the core specs below never change.
       </p>
-      <div class="hero__chips reveal" style="--d:.28s">
+      <div class="hero__chips reveal" style="--d:.24s">
         <span class="chip"><b>3840 × 2160</b> UHD 4K</span>
         <span class="chip"><b>23.976</b> fps</span>
         <span class="chip"><b>Square</b> pixels</span>
-        <span class="chip chip--alt">Premiere Pro</span>
-        <span class="chip chip--alt">DaVinci Resolve</span>
       </div>
-      <a class="hero__scroll reveal" href="#flow" style="--d:.36s">Start the pipeline ↓</a>
+
+      <!-- pipeline glance -->
+      <div class="glance reveal" style="--d:.32s">
+        <a class="glance__step" href="#s-edit"><span>01</span>Edit</a>
+        <i class="glance__arr">→</i>
+        <a class="glance__step" href="#s-lock"><span>02</span>Lock &amp; Assets</a>
+        <i class="glance__arr">→</i>
+        <a class="glance__step glance__step--split" href="#s-finish"><span>03</span>Finish <em>audio ∥ color</em></a>
+        <i class="glance__arr">→</i>
+        <a class="glance__step glance__step--final" href="#s-deliver"><span>04</span>Deliver</a>
+      </div>
     </header>
 
-    <!-- ░░ FLOW OVERVIEW ░░ -->
-    <section id="flow" class="section">
+    <!-- ░░ CORE SPEC ░░ -->
+    <section id="spec" class="section">
       <div class="section__head">
-        <span class="kicker">00 — Overview</span>
-        <h2>The pipeline at a glance</h2>
-        <p class="section__sub">Six stages, one straight line. Audio runs in parallel with color so neither blocks the edit.</p>
+        <span class="kicker">Non-negotiable</span>
+        <h2>The core spec</h2>
+        <p class="section__sub">One timeline setting, used everywhere. Set it <b>before</b> you import a single clip.</p>
       </div>
-      <ol class="flowmap">
-        <li><span class="flowmap__n">01</span><span class="flowmap__t">Ingest &amp; Proxies</span></li>
-        <li><span class="flowmap__n">02</span><span class="flowmap__t">Offline Edit</span></li>
-        <li><span class="flowmap__n">03</span><span class="flowmap__t">Picture Lock + Assets</span></li>
-        <li class="flowmap__split">
-          <span class="flowmap__n">04</span><span class="flowmap__t">Audio Handoff <em>∥</em> Color</span>
-        </li>
-        <li><span class="flowmap__n">05</span><span class="flowmap__t">Online / Conform</span></li>
-        <li class="is-final"><span class="flowmap__n">06</span><span class="flowmap__t">Master &amp; Deliver</span></li>
-      </ol>
-    </section>
-
-    <!-- ░░ SEQUENCE SPEC ░░ -->
-    <section id="sequence" class="section">
-      <div class="section__head">
-        <span class="kicker">01 — Non-negotiable</span>
-        <h2>Sequence / composition spec</h2>
-        <p class="section__sub">
-          Set this <b>before</b> you import a single clip. Every timeline, comp and nested sequence uses these exact values.
-        </p>
-      </div>
-
       <div class="specgrid">
         <div class="specgrid__item"><span class="specgrid__k">Resolution</span><span class="specgrid__v">3840 × 2160</span><span class="specgrid__n">UHD 4K</span></div>
-        <div class="specgrid__item"><span class="specgrid__k">Pixel Aspect</span><span class="specgrid__v">Square (1.0)</span><span class="specgrid__n">No anamorphic</span></div>
-        <div class="specgrid__item"><span class="specgrid__k">Frame Rate</span><span class="specgrid__v">23.976</span><span class="specgrid__n">fps, drop-frame TC</span></div>
+        <div class="specgrid__item"><span class="specgrid__k">Pixel aspect</span><span class="specgrid__v">Square</span><span class="specgrid__n">1.0, no anamorphic</span></div>
+        <div class="specgrid__item"><span class="specgrid__k">Frame rate</span><span class="specgrid__v">23.976</span><span class="specgrid__n">fps</span></div>
         <div class="specgrid__item"><span class="specgrid__k">Scan</span><span class="specgrid__v">Progressive</span><span class="specgrid__n">No fields</span></div>
       </div>
 
-      <div class="tabcard" data-tabs>
-        <div class="tabcard__bar">
-          <button class="tabcard__tab is-active" data-tab="ppro">Premiere Pro</button>
-          <button class="tabcard__tab" data-tab="resolve">DaVinci Resolve</button>
-        </div>
-        <div class="tabcard__panel is-active" data-panel="ppro">
-          <p class="tabcard__path">New Sequence → <b>Settings</b> tab</p>
-          <ul class="kv">
-            <li><span>Editing Mode</span><code>Custom</code></li>
-            <li><span>Timebase</span><code>23.976 frames/second</code></li>
-            <li><span>Frame Size</span><code>3840 h × 2160 v</code></li>
-            <li><span>Pixel Aspect Ratio</span><code>Square Pixels (1.0)</code></li>
-            <li><span>Fields</span><code>No Fields (Progressive Scan)</code></li>
-            <li><span>Display Format</span><code>23.976 fps Timecode</code></li>
-          </ul>
-        </div>
-        <div class="tabcard__panel" data-panel="resolve">
-          <p class="tabcard__path">Project Settings (⇧9) → <b>Master Settings</b></p>
-          <ul class="kv">
-            <li><span>Timeline Resolution</span><code>3840 × 2160 Ultra HD</code></li>
-            <li><span>Timeline Frame Rate</span><code>23.976</code></li>
-            <li><span>Playback Frame Rate</span><code>23.976</code></li>
-            <li><span>Pixel Aspect Ratio</span><code>Square</code></li>
-          </ul>
-          <p class="note">⚠ In Resolve the project frame rate locks once media is added — set it on an empty project first.</p>
-        </div>
+      <div class="fold" data-fold>
+        <button class="fold__head fold__head--slim">
+          <span class="fold__titles"><b>Where to set it</b><em>Exact menu paths — Premiere Pro &amp; DaVinci Resolve</em></span>
+          <span class="fold__icon"></span>
+        </button>
+        <div class="fold__wrap"><div class="fold__body">
+          <div class="tabcard" data-tabs>
+            <div class="tabcard__bar">
+              <button class="tabcard__tab is-active" data-tab="spec-ppro">Premiere Pro</button>
+              <button class="tabcard__tab" data-tab="spec-res">DaVinci Resolve</button>
+            </div>
+            <div class="tabcard__panel is-active" data-panel="spec-ppro">
+              <p class="tabcard__path">New Sequence → <b>Settings</b> tab</p>
+              <ul class="kv">
+                <li><span>Editing Mode</span><code>Custom</code></li>
+                <li><span>Timebase</span><code>23.976 fps</code></li>
+                <li><span>Frame Size</span><code>3840 × 2160</code></li>
+                <li><span>Pixel Aspect Ratio</span><code>Square Pixels (1.0)</code></li>
+                <li><span>Fields</span><code>No Fields (Progressive)</code></li>
+              </ul>
+            </div>
+            <div class="tabcard__panel" data-panel="spec-res">
+              <p class="tabcard__path">Project Settings (⇧9) → <b>Master Settings</b></p>
+              <ul class="kv">
+                <li><span>Timeline Resolution</span><code>3840 × 2160 UHD</code></li>
+                <li><span>Timeline Frame Rate</span><code>23.976</code></li>
+                <li><span>Pixel Aspect Ratio</span><code>Square</code></li>
+              </ul>
+              <p class="note">⚠ Frame rate locks once media is added — set it on an empty project first.</p>
+            </div>
+          </div>
+        </div></div>
       </div>
     </section>
 
-    <!-- ░░ PHASES ░░ -->
-    <section class="phases">
+    <!-- ░░ THE WORKFLOW ░░ -->
+    <section class="section">
+      <div class="section__head">
+        <span class="kicker">The workflow</span>
+        <h2>Four stages, start to finish</h2>
+        <p class="section__sub">Each stage shows its steps and the file it produces. Click to expand.</p>
+      </div>
 
-      <!-- 02 INGEST -->
-      <article id="p-ingest" class="phase">
-        <div class="phase__index"><span>01</span></div>
-        <div class="phase__body">
-          <span class="kicker">Pre-edit · Producer / Post-lead</span>
-          <h3>Ingest &amp; proxies</h3>
-          <p>Before anything reaches an editor, the camera negatives are protected and lightweight versions are built for cutting.</p>
+      <!-- STAGE 01 -->
+      <div class="fold stage-fold" id="s-edit" data-fold>
+        <button class="fold__head">
+          <span class="fold__n">01</span>
+          <span class="fold__titles"><b>Edit</b><em>Proxies in, cut on the spec timeline, share review exports.</em></span>
+          <span class="fold__chip">Review · 4K H.264 .mov · 20 Mbps</span>
+          <span class="fold__icon"></span>
+        </button>
+        <div class="fold__wrap"><div class="fold__body">
           <ul class="steps">
-            <li>Back up and catalog all <b>RAW footage</b> — originals are never edited directly.</li>
-            <li>Generate proxies with the <b>Blackmagic Proxy Generator</b>.</li>
-            <li>Send <b>proxies + sound recordings</b> to the editors.</li>
-          </ul>
-          <p class="note">Editors cut against proxies; the XML export later tells us exactly which RAW clips to pull.</p>
-        </div>
-      </article>
-
-      <!-- 03 EDIT -->
-      <article id="p-edit" class="phase">
-        <div class="phase__index"><span>02</span></div>
-        <div class="phase__body">
-          <span class="kicker">Offline · Editor</span>
-          <h3>Offline edit</h3>
-          <p>Build the story on the spec timeline. Grantee stills arrive as JPGs and go in as <b>temporary placeholders</b>.</p>
-          <ul class="steps">
-            <li>Cut on a sequence that matches the <a href="#sequence">Sequence Spec</a> exactly.</li>
-            <li>Drop in grantee <b>JPG placeholders</b> where final images will live — these get replaced after lock.</li>
-            <li>Publish <b>Review versions</b> for feedback rounds.</li>
+            <li>Producer backs up <b>RAW</b> and builds proxies with the <b>Blackmagic Proxy Generator</b>; proxies + sound recordings go to the editors.</li>
+            <li>Cut on a sequence that matches the <a href="#spec">core spec</a> exactly.</li>
+            <li>Drop grantee <b>JPGs as temporary placeholders</b> where final images will go.</li>
+            <li>Publish <b>review versions</b> for each feedback round.</li>
           </ul>
           <div class="deliverable">
-            <span class="deliverable__lbl">Deliverable — Review version</span>
-            <span class="deliverable__spec">4K · H.264 · <b>.mov</b> · 20,000 kbps</span>
-            <a class="deliverable__link" href="#recipes">→ Recipe A</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- 04 LOCK -->
-      <article id="p-lock" class="phase">
-        <div class="phase__index"><span>03</span></div>
-        <div class="phase__body">
-          <span class="kicker">Picture lock · Editor + Fuji team</span>
-          <h3>Picture lock &amp; final assets</h3>
-          <p>Once the cut is locked, swap placeholders for real assets and request the overlays that ride on top of them.</p>
-          <ul class="steps">
-            <li>Export an <b>image list</b> of every still used in the cut and send it to the Fuji team.</li>
-            <li>Receive <b>full-resolution / final images</b> + the matching <b>metadata graphics</b> (PNG overlays).</li>
-            <li>Confirm every final image is <b>sRGB</b>. Convert any other color space to sRGB before placing — this keeps colors identical to what was delivered and prevents mismatches.</li>
-            <li>Each <b>metadata PNG sits directly on top of its image</b>, for the full duration that image is on screen.</li>
-            <li>Export an <b>XML</b> so we can extract and archive only the RAW files actually used.</li>
-          </ul>
-          <div class="callout">
-            <b>Color management:</b> JPGs were placeholders only. Finals must be sRGB — if they arrive as Adobe RGB, Display&nbsp;P3 or ProPhoto, convert to sRGB (assign-then-convert) before they hit the timeline.
-          </div>
-        </div>
-      </article>
-
-      <!-- 05 AUDIO -->
-      <article id="p-audio" class="phase phase--parallel">
-        <div class="phase__index"><span>04</span><em>parallel</em></div>
-        <div class="phase__body">
-          <span class="kicker">Parallel track A · Editor → Sound design</span>
-          <h3>Audio handoff</h3>
-          <p>Right after lock, hand the sound team everything they need to work independently of color.</p>
-          <ul class="steps">
-            <li>Export an <b>AAF with embedded clips</b> so sound designers get every channel / audio line separated.</li>
-            <li>Export a <b>1080p H.264 reference</b> video so they can sync to picture.</li>
-          </ul>
-          <div class="deliverable">
-            <span class="deliverable__lbl">Deliverable — Sound handoff</span>
-            <span class="deliverable__spec">AAF (embedded) + 1080p H.264 <b>.mp4</b> · 20,000 kbps</span>
-            <a class="deliverable__link" href="#recipes">→ Recipes C &amp; B</a>
-          </div>
-          <p class="note">You wrote “AAC” — note that the format that carries <b>separated tracks + embedded clips</b> is <b>AAF</b> (Advanced Authoring Format). AAC is a final mixdown codec and can’t hold separate lines, so the handoff is an AAF.</p>
-        </div>
-      </article>
-
-      <!-- 06 COLOR -->
-      <article id="p-color" class="phase phase--parallel">
-        <div class="phase__index"><span>04</span><em>parallel</em></div>
-        <div class="phase__body">
-          <span class="kicker">Parallel track B · Colorist → Editor</span>
-          <h3>Color</h3>
-          <p>Color grades the locked picture from the conformed RAW and returns a single, edit-ready clip.</p>
-          <ul class="steps">
-            <li>Colorist receives the conformed files (via the XML / RAW pull).</li>
-            <li>Grade is delivered back as a <b>single ProRes 422 HQ</b> export the editor can lay straight into the timeline.</li>
-          </ul>
-          <div class="deliverable">
-            <span class="deliverable__lbl">Deliverable — Color return</span>
-            <span class="deliverable__spec">ProRes 422 HQ · single file · <b>.mov</b></span>
-            <a class="deliverable__link" href="#recipes">→ Recipe E</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- 07 ONLINE -->
-      <article id="p-online" class="phase">
-        <div class="phase__index"><span>05</span></div>
-        <div class="phase__body">
-          <span class="kicker">Online · Editor</span>
-          <h3>Online / conform</h3>
-          <p>Bring the three streams back together and render the version stakeholders sign off on.</p>
-          <ul class="steps">
-            <li>Lay <b>color + final mix + graphics</b> back onto the timeline.</li>
-            <li>Build the full <a href="#graphics">graphics stack</a> — bug, letterbox, metadata overlays, intro &amp; outro.</li>
-            <li>Export the <b>Online version</b> and upload to <b>Frame.io</b> for approval.</li>
-          </ul>
-          <div class="deliverable">
-            <span class="deliverable__lbl">Deliverable — Online (approval)</span>
+            <span class="deliverable__lbl">Produces — Review version</span>
             <span class="deliverable__spec">4K · H.264 · <b>.mov</b> · 20,000 kbps → Frame.io</span>
-            <a class="deliverable__link" href="#recipes">→ Recipe A</a>
+            <a class="deliverable__link" href="#recipes">Recipe A →</a>
           </div>
-        </div>
-      </article>
+        </div></div>
+      </div>
 
-      <!-- 08 MASTER -->
-      <article id="p-master" class="phase is-final">
-        <div class="phase__index"><span>06</span></div>
-        <div class="phase__body">
-          <span class="kicker">Delivery · Editor</span>
-          <h3>Master files &amp; delivery</h3>
-          <p>Once approved, output <b>two</b> masters. Both are ProRes 422 HQ and go to the agreed host.</p>
+      <!-- STAGE 02 -->
+      <div class="fold stage-fold" id="s-lock" data-fold>
+        <button class="fold__head">
+          <span class="fold__n">02</span>
+          <span class="fold__titles"><b>Lock &amp; Assets</b><em>At picture lock, swap placeholders for final assets and request overlays.</em></span>
+          <span class="fold__chip">XML · final images · metadata PNGs</span>
+          <span class="fold__icon"></span>
+        </button>
+        <div class="fold__wrap"><div class="fold__body">
+          <ul class="steps">
+            <li>Send the <b>image list</b> of every still used in the cut to the Fuji team.</li>
+            <li>Receive <b>full-resolution finals</b> + the matching <b>metadata graphics</b> (PNG overlays).</li>
+            <li>Confirm every final is <b>sRGB</b>. Convert any other color space to sRGB before placing — keeps colors identical and prevents mismatches.</li>
+            <li>Place each <b>metadata PNG directly on top of its image</b>, for the full time it’s on screen.</li>
+            <li>Export an <b>XML</b> so post pulls and archives only the RAW actually used.</li>
+          </ul>
+          <div class="callout"><b>Color management:</b> JPGs were placeholders only. If finals arrive as Adobe RGB, Display&nbsp;P3 or ProPhoto, convert to sRGB before they hit the timeline.</div>
+        </div></div>
+      </div>
+
+      <!-- STAGE 03 -->
+      <div class="fold stage-fold stage-fold--parallel" id="s-finish" data-fold>
+        <button class="fold__head">
+          <span class="fold__n">03</span>
+          <span class="fold__titles"><b>Finish</b><em>Audio and color run in parallel, then conform for approval.</em></span>
+          <span class="fold__chip">Online · 4K H.264 .mov · 20 Mbps</span>
+          <span class="fold__icon"></span>
+        </button>
+        <div class="fold__wrap"><div class="fold__body">
+          <div class="subgroup">
+            <h4 class="subgroup__t"><span class="subgroup__tag">∥ parallel</span> Audio handoff</h4>
+            <ul class="steps">
+              <li>Export an <b>AAF with embedded clips</b> — every channel / line separated for sound design.</li>
+              <li>Export a <b>1080p H.264 reference</b> (.mp4 · 20,000 kbps) so they can sync to picture.</li>
+            </ul>
+            <p class="note">You said “AAC” — the format that carries <b>separated tracks + embedded clips</b> is <b>AAF</b>. AAC is a final mixdown codec and can’t hold separate lines, so the handoff is an AAF.</p>
+          </div>
+          <div class="subgroup">
+            <h4 class="subgroup__t"><span class="subgroup__tag">∥ parallel</span> Color</h4>
+            <ul class="steps">
+              <li>Colorist grades from the conform and returns a <b>single ProRes 422 HQ</b> file the editor lays straight in.</li>
+            </ul>
+          </div>
+          <div class="subgroup">
+            <h4 class="subgroup__t"><span class="subgroup__tag">then</span> Online / approval</h4>
+            <ul class="steps">
+              <li>Lay back <b>color + final mix + graphics</b> and build the full <a href="#graphics">graphics stack</a>.</li>
+              <li>Export the <b>online version</b> and upload to <b>Frame.io</b> for sign-off.</li>
+            </ul>
+          </div>
+          <div class="deliverable">
+            <span class="deliverable__lbl">Produces — Online (approval)</span>
+            <span class="deliverable__spec">4K · H.264 · <b>.mov</b> · 20,000 kbps → Frame.io</span>
+            <a class="deliverable__link" href="#recipes">Recipes A · B · C · E →</a>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- STAGE 04 -->
+      <div class="fold stage-fold stage-fold--final" id="s-deliver" data-fold>
+        <button class="fold__head">
+          <span class="fold__n">04</span>
+          <span class="fold__titles"><b>Deliver</b><em>After approval, output two ProRes masters.</em></span>
+          <span class="fold__chip">2 × ProRes 422 HQ</span>
+          <span class="fold__icon"></span>
+        </button>
+        <div class="fold__wrap"><div class="fold__body">
           <div class="masters">
             <div class="master">
-              <span class="master__tag">Master 1</span>
-              <h4>Clean cut</h4>
-              <p>No GFX / VFX over the images across the whole cut, and <b>no subtitles</b>. Keep the intro &amp; outro sequences.</p>
+              <span class="master__tag">Master 1 — Clean</span>
+              <p>No GFX / VFX over the images across the whole cut, and <b>no subtitles</b>. Keep the intro &amp; outro.</p>
             </div>
             <div class="master">
-              <span class="master__tag">Master 2</span>
-              <h4>Full quality</h4>
+              <span class="master__tag">Master 2 — Full</span>
               <p>Everything on — bug, letterbox, metadata overlays, subtitles, intro &amp; outro.</p>
             </div>
           </div>
           <div class="deliverable">
-            <span class="deliverable__lbl">Deliverable — Masters ×2</span>
+            <span class="deliverable__lbl">Produces — Masters ×2</span>
             <span class="deliverable__spec">ProRes 422 HQ · <b>.mov</b> → Frame.io or Dropbox</span>
-            <a class="deliverable__link" href="#recipes">→ Recipe E</a>
+            <a class="deliverable__link" href="#recipes">Recipe E →</a>
           </div>
-        </div>
-      </article>
-
-    </section>
-
-    <!-- ░░ GRAPHICS STACK ░░ -->
-    <section id="graphics" class="section">
-      <div class="section__head">
-        <span class="kicker">09 — Layering</span>
-        <h2>The graphics stack</h2>
-        <p class="section__sub">Top layer wins. Build it in this order so nothing covers what it shouldn’t.</p>
-      </div>
-
-      <div class="stackwrap">
-        <ol class="layers">
-          <li class="layer layer--1"><span class="layer__z">TOP</span><div><b>Metadata graphic (PNG)</b><p>Always directly above its image, for as long as that image is shown. One per still.</p></div></li>
-          <li class="layer layer--2"><span class="layer__z">↑</span><div><b>Fujifilm bug</b><p>Persistent over the whole video — <em>except</em> while full-res images are on screen, and never over the intro.</p></div></li>
-          <li class="layer layer--3"><span class="layer__z">↑</span><div><b>Letterbox</b><p>Maintained consistently across the body of the film.</p></div></li>
-          <li class="layer layer--4"><span class="layer__z">↑</span><div><b>Subtitles</b><p>On for the full-quality master · off for the clean master.</p></div></li>
-          <li class="layer layer--5"><span class="layer__z">BASE</span><div><b>Picture (color + edit)</b><p>Graded footage and final images.</p></div></li>
-        </ol>
-
-        <div class="bookends">
-          <div class="bookend">
-            <span class="bookend__tag">Opening</span>
-            <h4>Intro sequence</h4>
-            <p>Plays clean — <b>no bug</b> over the intro.</p>
-          </div>
-          <div class="bookend">
-            <span class="bookend__tag">Closing</span>
-            <h4>Outro + end card</h4>
-            <p>Credits and Fujifilm information. The <b>last frame holds on the end-card text</b> — never cut to black.</p>
-          </div>
-        </div>
+        </div></div>
       </div>
     </section>
 
-    <!-- ░░ EXPORT RECIPES ░░ -->
-    <section id="recipes" class="section">
+    <!-- ░░ REFERENCE ░░ -->
+    <section class="section section--ref">
       <div class="section__head">
-        <span class="kicker">10 — Copy / paste</span>
-        <h2>Export recipes</h2>
-        <p class="section__sub">Exact settings for each app. Hit copy and match them field for field.</p>
+        <span class="kicker">Reference</span>
+        <h2>Specs &amp; details</h2>
+        <p class="section__sub">Everything technical, on demand. Open what you need.</p>
       </div>
 
-      <!-- Recipe A -->
-      <div class="recipe">
-        <div class="recipe__head">
-          <span class="recipe__id">A</span>
-          <div>
-            <h3>Review &amp; Online — 4K H.264 MOV @ 20 Mbps</h3>
-            <p>Used for review versions and the online approval cut. → Frame.io</p>
+      <!-- GRAPHICS STACK -->
+      <div class="fold" id="graphics" data-fold>
+        <button class="fold__head fold__head--slim">
+          <span class="fold__titles"><b>Graphics stack &amp; bookends</b><em>Layer order, bug rules, intro / outro, end card.</em></span>
+          <span class="fold__icon"></span>
+        </button>
+        <div class="fold__wrap"><div class="fold__body">
+          <ol class="layers">
+            <li class="layer layer--top"><span class="layer__z">TOP</span><div><b>Metadata graphic (PNG)</b><p>Always directly above its image, for as long as that image is shown.</p></div></li>
+            <li class="layer"><span class="layer__z">↑</span><div><b>Fujifilm bug</b><p>Over the whole video — <em>except</em> while full-res images are on screen, and never over the intro.</p></div></li>
+            <li class="layer"><span class="layer__z">↑</span><div><b>Letterbox</b><p>Maintained consistently across the body.</p></div></li>
+            <li class="layer"><span class="layer__z">↑</span><div><b>Subtitles</b><p>On for the full master · off for the clean master.</p></div></li>
+            <li class="layer layer--base"><span class="layer__z">BASE</span><div><b>Picture (color + edit)</b><p>Graded footage and final images.</p></div></li>
+          </ol>
+          <div class="bookends">
+            <div class="bookend"><span class="bookend__tag">Opening</span><b>Intro sequence</b><p>Plays clean — <b>no bug</b> over the intro.</p></div>
+            <div class="bookend"><span class="bookend__tag">Closing</span><b>Outro + end card</b><p>Credits and Fujifilm info. The <b>last frame holds on the end-card text</b> — never cut to black.</p></div>
           </div>
-        </div>
-        <div class="tabcard" data-tabs>
-          <div class="tabcard__bar">
-            <button class="tabcard__tab is-active" data-tab="a-ppro">Premiere Pro</button>
-            <button class="tabcard__tab" data-tab="a-res">DaVinci Resolve</button>
-          </div>
-          <div class="tabcard__panel is-active" data-panel="a-ppro">
-            <ul class="kv">
-              <li><span>Format</span><code>QuickTime</code></li>
-              <li><span>Video Codec</span><code>H.264</code></li>
-              <li><span>Width × Height</span><code>3840 × 2160</code></li>
-              <li><span>Frame Rate</span><code>23.976</code></li>
-              <li><span>Field Order</span><code>Progressive</code></li>
-              <li><span>Aspect</span><code>Square Pixels (1.0)</code></li>
-              <li><span>Bitrate Encoding</span><code>VBR, 2 pass</code></li>
-              <li><span>Target / Max Bitrate</span><code>20 Mbps</code></li>
-            </ul>
-            <p class="note">Premiere’s “H.264” format outputs <b>.mp4</b>. To get H.264 inside a <b>.mov</b>, choose <b>Format: QuickTime</b> and set Video Codec → H.264.</p>
-            <button class="copybtn" data-copy="Format: QuickTime | Video Codec: H.264 | 3840x2160 | 23.976 fps | Progressive | Square Pixels 1.0 | VBR 2-pass | Target/Max bitrate: 20 Mbps | Container: .mov">Copy settings</button>
-          </div>
-          <div class="tabcard__panel" data-panel="a-res">
-            <p class="tabcard__path">Deliver page → custom preset</p>
-            <ul class="kv">
-              <li><span>Format</span><code>QuickTime</code></li>
-              <li><span>Codec</span><code>H.264</code></li>
-              <li><span>Resolution</span><code>3840 × 2160</code></li>
-              <li><span>Frame Rate</span><code>23.976</code></li>
-              <li><span>Quality</span><code>Restrict to 20000 Kb/s</code></li>
-              <li><span>Audio</span><code>Linear PCM / AAC</code></li>
-            </ul>
-            <button class="copybtn" data-copy="Deliver > Format: QuickTime | Codec: H.264 | 3840x2160 | 23.976 fps | Quality: Restrict to 20000 Kb/s | Container: .mov">Copy settings</button>
-          </div>
-        </div>
+        </div></div>
       </div>
 
-      <!-- Recipe B -->
-      <div class="recipe">
-        <div class="recipe__head">
-          <span class="recipe__id">B</span>
-          <div>
-            <h3>Audio reference — 1080p H.264 MP4 @ 20 Mbps</h3>
-            <p>Picture reference for the sound designers.</p>
+      <!-- EXPORT RECIPES -->
+      <div class="fold" id="recipes" data-fold>
+        <button class="fold__head fold__head--slim">
+          <span class="fold__titles"><b>Export recipes</b><em>Exact settings, copy-ready, for Premiere &amp; Resolve.</em></span>
+          <span class="fold__icon"></span>
+        </button>
+        <div class="fold__wrap"><div class="fold__body">
+
+          <!-- Recipe A -->
+          <div class="recipe">
+            <div class="recipe__head"><span class="recipe__id">A</span><div><h3>Review &amp; Online — 4K H.264 MOV @ 20 Mbps</h3></div></div>
+            <div class="tabcard" data-tabs>
+              <div class="tabcard__bar">
+                <button class="tabcard__tab is-active" data-tab="a-ppro">Premiere Pro</button>
+                <button class="tabcard__tab" data-tab="a-res">DaVinci Resolve</button>
+              </div>
+              <div class="tabcard__panel is-active" data-panel="a-ppro">
+                <ul class="kv">
+                  <li><span>Format</span><code>QuickTime</code></li>
+                  <li><span>Video Codec</span><code>H.264</code></li>
+                  <li><span>Size</span><code>3840 × 2160</code></li>
+                  <li><span>Frame Rate</span><code>23.976</code></li>
+                  <li><span>Bitrate</span><code>VBR 2-pass · 20 Mbps</code></li>
+                </ul>
+                <p class="note">Premiere’s “H.264” format gives <b>.mp4</b>. For H.264 in a <b>.mov</b>, choose <b>QuickTime</b> → Video Codec H.264.</p>
+                <button class="copybtn" data-copy="Format: QuickTime | Video Codec: H.264 | 3840x2160 | 23.976 fps | VBR 2-pass | Target/Max 20 Mbps | .mov">Copy</button>
+              </div>
+              <div class="tabcard__panel" data-panel="a-res">
+                <ul class="kv">
+                  <li><span>Format</span><code>QuickTime</code></li>
+                  <li><span>Codec</span><code>H.264</code></li>
+                  <li><span>Resolution</span><code>3840 × 2160</code></li>
+                  <li><span>Frame Rate</span><code>23.976</code></li>
+                  <li><span>Quality</span><code>Restrict to 20000 Kb/s</code></li>
+                </ul>
+                <button class="copybtn" data-copy="Deliver > QuickTime | H.264 | 3840x2160 | 23.976 | Restrict 20000 Kb/s | .mov">Copy</button>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="tabcard" data-tabs>
-          <div class="tabcard__bar">
-            <button class="tabcard__tab is-active" data-tab="b-ppro">Premiere Pro</button>
-            <button class="tabcard__tab" data-tab="b-res">DaVinci Resolve</button>
+
+          <!-- Recipe B -->
+          <div class="recipe">
+            <div class="recipe__head"><span class="recipe__id">B</span><div><h3>Audio reference — 1080p H.264 MP4 @ 20 Mbps</h3></div></div>
+            <div class="tabcard" data-tabs>
+              <div class="tabcard__bar">
+                <button class="tabcard__tab is-active" data-tab="b-ppro">Premiere Pro</button>
+                <button class="tabcard__tab" data-tab="b-res">DaVinci Resolve</button>
+              </div>
+              <div class="tabcard__panel is-active" data-panel="b-ppro">
+                <ul class="kv">
+                  <li><span>Format</span><code>H.264</code></li>
+                  <li><span>Size</span><code>1920 × 1080</code></li>
+                  <li><span>Frame Rate</span><code>23.976</code></li>
+                  <li><span>Bitrate</span><code>VBR 2-pass · 20 Mbps</code></li>
+                  <li><span>Container</span><code>.mp4</code></li>
+                </ul>
+                <button class="copybtn" data-copy="Format: H.264 | 1920x1080 | 23.976 | VBR 2-pass | 20 Mbps | .mp4">Copy</button>
+              </div>
+              <div class="tabcard__panel" data-panel="b-res">
+                <ul class="kv">
+                  <li><span>Format</span><code>MP4</code></li>
+                  <li><span>Codec</span><code>H.264</code></li>
+                  <li><span>Resolution</span><code>1920 × 1080</code></li>
+                  <li><span>Quality</span><code>Restrict to 20000 Kb/s</code></li>
+                </ul>
+                <button class="copybtn" data-copy="Deliver > MP4 | H.264 | 1920x1080 | 23.976 | Restrict 20000 Kb/s">Copy</button>
+              </div>
+            </div>
           </div>
-          <div class="tabcard__panel is-active" data-panel="b-ppro">
-            <ul class="kv">
-              <li><span>Format</span><code>H.264</code></li>
-              <li><span>Width × Height</span><code>1920 × 1080</code></li>
-              <li><span>Frame Rate</span><code>23.976</code></li>
-              <li><span>Bitrate Encoding</span><code>VBR, 2 pass</code></li>
-              <li><span>Target / Max Bitrate</span><code>20 Mbps</code></li>
-              <li><span>Container</span><code>.mp4</code></li>
-            </ul>
-            <button class="copybtn" data-copy="Format: H.264 | 1920x1080 | 23.976 fps | VBR 2-pass | Target/Max bitrate: 20 Mbps | Container: .mp4">Copy settings</button>
+
+          <!-- Recipe C -->
+          <div class="recipe">
+            <div class="recipe__head"><span class="recipe__id">C</span><div><h3>Audio handoff — AAF (embedded clips)</h3></div></div>
+            <div class="tabcard" data-tabs>
+              <div class="tabcard__bar">
+                <button class="tabcard__tab is-active" data-tab="c-ppro">Premiere Pro</button>
+                <button class="tabcard__tab" data-tab="c-res">DaVinci Resolve</button>
+              </div>
+              <div class="tabcard__panel is-active" data-panel="c-ppro">
+                <p class="tabcard__path">File → Export → <b>AAF</b></p>
+                <ul class="kv">
+                  <li><span>Sample Rate</span><code>48000 Hz</code></li>
+                  <li><span>Bit Depth</span><code>24-bit</code></li>
+                  <li><span>Audio</span><code>Embed · Breakout to Mono</code></li>
+                  <li><span>Handles</span><code>1–2 s</code></li>
+                </ul>
+                <button class="copybtn" data-copy="File > Export > AAF | 48000 Hz | 24-bit | Embed Audio | Breakout to Mono | Render clip effects | Handles 1-2s">Copy</button>
+              </div>
+              <div class="tabcard__panel" data-panel="c-res">
+                <p class="tabcard__path">Media Pool → right-click timeline → Export → <b>AAF</b></p>
+                <ul class="kv">
+                  <li><span>Audio</span><code>Embedded</code></li>
+                  <li><span>Sample Rate</span><code>48000 Hz · 24-bit</code></li>
+                  <li><span>Handles</span><code>1–2 s</code></li>
+                </ul>
+                <button class="copybtn" data-copy="Media Pool > right-click timeline > Export > AAF | Embedded | 48000 Hz 24-bit | Handles 1-2s">Copy</button>
+              </div>
+            </div>
           </div>
-          <div class="tabcard__panel" data-panel="b-res">
-            <ul class="kv">
-              <li><span>Format</span><code>MP4</code></li>
-              <li><span>Codec</span><code>H.264</code></li>
-              <li><span>Resolution</span><code>1920 × 1080</code></li>
-              <li><span>Frame Rate</span><code>23.976</code></li>
-              <li><span>Quality</span><code>Restrict to 20000 Kb/s</code></li>
-            </ul>
-            <button class="copybtn" data-copy="Deliver > Format: MP4 | Codec: H.264 | 1920x1080 | 23.976 fps | Quality: Restrict to 20000 Kb/s">Copy settings</button>
+
+          <!-- Recipe D -->
+          <div class="recipe">
+            <div class="recipe__head"><span class="recipe__id">D</span><div><h3>XML export — used-media pull</h3></div></div>
+            <div class="tabcard" data-tabs>
+              <div class="tabcard__bar">
+                <button class="tabcard__tab is-active" data-tab="d-ppro">Premiere Pro</button>
+                <button class="tabcard__tab" data-tab="d-res">DaVinci Resolve</button>
+              </div>
+              <div class="tabcard__panel is-active" data-panel="d-ppro">
+                <p class="tabcard__path">File → Export → <b>Final Cut Pro XML</b> (.xml)</p>
+                <button class="copybtn" data-copy="File > Export > Final Cut Pro XML (.xml)">Copy</button>
+              </div>
+              <div class="tabcard__panel" data-panel="d-res">
+                <p class="tabcard__path">Media Pool → right-click timeline → Export → <b>FCP 7 XML / FCPXML</b></p>
+                <button class="copybtn" data-copy="Media Pool > right-click timeline > Export > Final Cut Pro 7 XML / FCPXML">Copy</button>
+              </div>
+            </div>
           </div>
-        </div>
+
+          <!-- Recipe E -->
+          <div class="recipe">
+            <div class="recipe__head"><span class="recipe__id">E</span><div><h3>Color return &amp; Masters — ProRes 422 HQ</h3></div></div>
+            <div class="tabcard" data-tabs>
+              <div class="tabcard__bar">
+                <button class="tabcard__tab is-active" data-tab="e-ppro">Premiere Pro</button>
+                <button class="tabcard__tab" data-tab="e-res">DaVinci Resolve</button>
+              </div>
+              <div class="tabcard__panel is-active" data-panel="e-ppro">
+                <ul class="kv">
+                  <li><span>Format</span><code>QuickTime</code></li>
+                  <li><span>Video Codec</span><code>Apple ProRes 422 HQ</code></li>
+                  <li><span>Size</span><code>3840 × 2160</code></li>
+                  <li><span>Frame Rate</span><code>23.976</code></li>
+                </ul>
+                <button class="copybtn" data-copy="Format: QuickTime | Apple ProRes 422 HQ | 3840x2160 | 23.976 | .mov">Copy</button>
+              </div>
+              <div class="tabcard__panel" data-panel="e-res">
+                <ul class="kv">
+                  <li><span>Format</span><code>QuickTime</code></li>
+                  <li><span>Codec</span><code>Apple ProRes</code></li>
+                  <li><span>Type</span><code>ProRes 422 HQ</code></li>
+                  <li><span>Size</span><code>3840 × 2160</code></li>
+                </ul>
+                <button class="copybtn" data-copy="Deliver > QuickTime | Apple ProRes | 422 HQ | 3840x2160 | 23.976">Copy</button>
+              </div>
+            </div>
+          </div>
+        </div></div>
       </div>
 
-      <!-- Recipe C -->
-      <div class="recipe">
-        <div class="recipe__head">
-          <span class="recipe__id">C</span>
-          <div>
-            <h3>Audio handoff — AAF (embedded clips)</h3>
-            <p>Every channel / line delivered separately to sound design.</p>
+      <!-- DELIVERABLES MATRIX -->
+      <div class="fold" id="matrix" data-fold>
+        <button class="fold__head fold__head--slim">
+          <span class="fold__titles"><b>Deliverables matrix</b><em>Every output in one table.</em></span>
+          <span class="fold__icon"></span>
+        </button>
+        <div class="fold__wrap"><div class="fold__body">
+          <div class="tablewrap">
+            <table class="matrix">
+              <thead><tr><th>Deliverable</th><th>Codec / Container</th><th>Resolution</th><th>FPS</th><th>Bitrate</th><th>Destination</th></tr></thead>
+              <tbody>
+                <tr><td>Proxies (ingest)</td><td>Blackmagic Proxy</td><td>—</td><td>23.976</td><td>—</td><td>Editors</td></tr>
+                <tr><td>Review cut</td><td>H.264 · .mov</td><td>3840 × 2160</td><td>23.976</td><td>20 Mbps</td><td>Frame.io</td></tr>
+                <tr><td>Audio handoff</td><td>AAF (embedded)</td><td>—</td><td>23.976</td><td>—</td><td>Sound design</td></tr>
+                <tr><td>Audio reference</td><td>H.264 · .mp4</td><td>1920 × 1080</td><td>23.976</td><td>20 Mbps</td><td>Sound design</td></tr>
+                <tr><td>Used-media pull</td><td>FCP7 XML</td><td>—</td><td>—</td><td>—</td><td>Post (RAW archive)</td></tr>
+                <tr><td>Color return</td><td>ProRes 422 HQ · .mov</td><td>3840 × 2160</td><td>23.976</td><td>—</td><td>Editor</td></tr>
+                <tr><td>Online (approval)</td><td>H.264 · .mov</td><td>3840 × 2160</td><td>23.976</td><td>20 Mbps</td><td>Frame.io</td></tr>
+                <tr class="matrix__master"><td>Master — Clean</td><td>ProRes 422 HQ · .mov</td><td>3840 × 2160</td><td>23.976</td><td>—</td><td>Frame.io / Dropbox</td></tr>
+                <tr class="matrix__master"><td>Master — Full</td><td>ProRes 422 HQ · .mov</td><td>3840 × 2160</td><td>23.976</td><td>—</td><td>Frame.io / Dropbox</td></tr>
+              </tbody>
+            </table>
           </div>
-        </div>
-        <div class="tabcard" data-tabs>
-          <div class="tabcard__bar">
-            <button class="tabcard__tab is-active" data-tab="c-ppro">Premiere Pro</button>
-            <button class="tabcard__tab" data-tab="c-res">DaVinci Resolve</button>
-          </div>
-          <div class="tabcard__panel is-active" data-panel="c-ppro">
-            <p class="tabcard__path">File → Export → <b>AAF</b></p>
-            <ul class="kv">
-              <li><span>Sample Rate</span><code>48000 Hz</code></li>
-              <li><span>Bit Depth</span><code>24-bit</code></li>
-              <li><span>Audio</span><code>Embed Audio · Breakout to Mono</code></li>
-              <li><span>Render</span><code>Render audio clip effects</code></li>
-              <li><span>Handles</span><code>1–2 s</code></li>
-            </ul>
-            <button class="copybtn" data-copy="File > Export > AAF | 48000 Hz | 24-bit | Embed Audio | Breakout to Mono | Render audio clip effects | Handles 1-2s">Copy settings</button>
-          </div>
-          <div class="tabcard__panel" data-panel="c-res">
-            <p class="tabcard__path">Media Pool → right-click timeline → Timelines → Export → <b>AAF</b></p>
-            <ul class="kv">
-              <li><span>Audio</span><code>Embedded</code></li>
-              <li><span>Sample Rate</span><code>48000 Hz / 24-bit</code></li>
-              <li><span>Handles</span><code>1–2 s</code></li>
-            </ul>
-            <button class="copybtn" data-copy="Media Pool > right-click timeline > Export > AAF | Embedded audio | 48000 Hz 24-bit | Handles 1-2s">Copy settings</button>
-          </div>
-        </div>
+        </div></div>
       </div>
 
-      <!-- Recipe D -->
-      <div class="recipe">
-        <div class="recipe__head">
-          <span class="recipe__id">D</span>
-          <div>
-            <h3>XML export — used-media pull</h3>
-            <p>Lets post extract &amp; archive only the RAW clips actually used in the cut.</p>
-          </div>
-        </div>
-        <div class="tabcard" data-tabs>
-          <div class="tabcard__bar">
-            <button class="tabcard__tab is-active" data-tab="d-ppro">Premiere Pro</button>
-            <button class="tabcard__tab" data-tab="d-res">DaVinci Resolve</button>
-          </div>
-          <div class="tabcard__panel is-active" data-panel="d-ppro">
-            <p class="tabcard__path">File → Export → <b>Final Cut Pro XML</b></p>
-            <ul class="kv">
-              <li><span>Output</span><code>.xml</code></li>
-              <li><span>Use</span><code>Relink → pull used RAW only</code></li>
-            </ul>
-            <button class="copybtn" data-copy="File > Export > Final Cut Pro XML (.xml)">Copy settings</button>
-          </div>
-          <div class="tabcard__panel" data-panel="d-res">
-            <p class="tabcard__path">Media Pool → right-click timeline → Timelines → Export</p>
-            <ul class="kv">
-              <li><span>Format</span><code>FCP 7 XML / FCPXML</code></li>
-            </ul>
-            <button class="copybtn" data-copy="Media Pool > right-click timeline > Export > Final Cut Pro 7 XML / FCPXML">Copy settings</button>
-          </div>
-        </div>
+      <!-- NAMING -->
+      <div class="fold" id="naming" data-fold>
+        <button class="fold__head fold__head--slim">
+          <span class="fold__titles"><b>File naming</b><em>Suggested standard so every file is self-describing.</em></span>
+          <span class="fold__icon"></span>
+        </button>
+        <div class="fold__wrap"><div class="fold__body">
+          <code class="naming__pattern">GFX_<b>ProjectName</b>_<b>STAGE</b>_v<b>NN</b>_<b>YYMMDD</b>.ext</code>
+          <ul class="naming__list">
+            <li><code>GFX_TanakaReef_REVIEW_v03_260605.mov</code></li>
+            <li><code>GFX_TanakaReef_ONLINE_v01_260612.mov</code></li>
+            <li><code>GFX_TanakaReef_AUDIO-AAF_v01_260607.aaf</code></li>
+            <li><code>GFX_TanakaReef_MASTER-FULL_v01_260615.mov</code></li>
+          </ul>
+          <p class="note">Stages: <code>PROXY · REVIEW · XML · AUDIO-AAF · AUDIO-REF · COLOR · ONLINE · MASTER-CLEAN · MASTER-FULL</code></p>
+        </div></div>
       </div>
 
-      <!-- Recipe E -->
-      <div class="recipe">
-        <div class="recipe__head">
-          <span class="recipe__id">E</span>
-          <div>
-            <h3>Color return &amp; Masters — ProRes 422 HQ</h3>
-            <p>Color’s single return file and both final masters.</p>
-          </div>
-        </div>
-        <div class="tabcard" data-tabs>
-          <div class="tabcard__bar">
-            <button class="tabcard__tab is-active" data-tab="e-ppro">Premiere Pro</button>
-            <button class="tabcard__tab" data-tab="e-res">DaVinci Resolve</button>
-          </div>
-          <div class="tabcard__panel is-active" data-panel="e-ppro">
-            <ul class="kv">
-              <li><span>Format</span><code>QuickTime</code></li>
-              <li><span>Video Codec</span><code>Apple ProRes 422 HQ</code></li>
-              <li><span>Width × Height</span><code>3840 × 2160</code></li>
-              <li><span>Frame Rate</span><code>23.976</code></li>
-              <li><span>Container</span><code>.mov</code></li>
-            </ul>
-            <button class="copybtn" data-copy="Format: QuickTime | Video Codec: Apple ProRes 422 HQ | 3840x2160 | 23.976 fps | Container: .mov">Copy settings</button>
-          </div>
-          <div class="tabcard__panel" data-panel="e-res">
-            <p class="tabcard__path">Deliver page</p>
-            <ul class="kv">
-              <li><span>Format</span><code>QuickTime</code></li>
-              <li><span>Codec</span><code>Apple ProRes</code></li>
-              <li><span>Type</span><code>ProRes 422 HQ</code></li>
-              <li><span>Resolution</span><code>3840 × 2160</code></li>
-              <li><span>Frame Rate</span><code>23.976</code></li>
-            </ul>
-            <button class="copybtn" data-copy="Deliver > Format: QuickTime | Codec: Apple ProRes | Type: 422 HQ | 3840x2160 | 23.976 fps">Copy settings</button>
-          </div>
-        </div>
+      <!-- GLOSSARY -->
+      <div class="fold" id="glossary" data-fold>
+        <button class="fold__head fold__head--slim">
+          <span class="fold__titles"><b>Glossary</b><em>Shared language for the team.</em></span>
+          <span class="fold__icon"></span>
+        </button>
+        <div class="fold__wrap"><div class="fold__body">
+          <dl class="glossary">
+            <div><dt>Proxy</dt><dd>Lightweight copy of the RAW for fast editing; conformed back for finishing.</dd></div>
+            <div><dt>Picture lock</dt><dd>Edit is final — no more timing or shot changes. Triggers finals, audio &amp; color.</dd></div>
+            <div><dt>Bug</dt><dd>Persistent Fujifilm logo (hidden over full-res images and the intro).</dd></div>
+            <div><dt>Metadata graphic</dt><dd>PNG overlay riding on top of each final image, from the Fuji team.</dd></div>
+            <div><dt>AAF</dt><dd>Audio interchange carrying separated tracks with embedded clips for sound design.</dd></div>
+            <div><dt>ProRes 422 HQ</dt><dd>Mastering codec for the color return and both final masters.</dd></div>
+            <div><dt>sRGB</dt><dd>Required color space for all final images. Convert anything else first.</dd></div>
+            <div><dt>Online / Conform</dt><dd>Reassembling color + audio + graphics at full quality for approval.</dd></div>
+          </dl>
+        </div></div>
       </div>
-    </section>
-
-    <!-- ░░ DELIVERABLES MATRIX ░░ -->
-    <section id="matrix" class="section">
-      <div class="section__head">
-        <span class="kicker">11 — Quick reference</span>
-        <h2>Deliverables matrix</h2>
-        <p class="section__sub">Every output the project expects, in one table.</p>
-      </div>
-      <div class="tablewrap">
-        <table class="matrix">
-          <thead>
-            <tr><th>Deliverable</th><th>Codec / Container</th><th>Resolution</th><th>FPS</th><th>Bitrate</th><th>Destination</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Proxies (ingest)</td><td>Blackmagic Proxy</td><td>—</td><td>23.976</td><td>—</td><td>Editors</td></tr>
-            <tr><td>Review cut</td><td>H.264 · .mov</td><td>3840 × 2160</td><td>23.976</td><td>20 Mbps</td><td>Frame.io</td></tr>
-            <tr><td>Audio handoff</td><td>AAF (embedded)</td><td>—</td><td>23.976</td><td>—</td><td>Sound design</td></tr>
-            <tr><td>Audio reference</td><td>H.264 · .mp4</td><td>1920 × 1080</td><td>23.976</td><td>20 Mbps</td><td>Sound design</td></tr>
-            <tr><td>Used-media pull</td><td>FCP7 XML</td><td>—</td><td>—</td><td>—</td><td>Post (RAW archive)</td></tr>
-            <tr><td>Color return</td><td>ProRes 422 HQ · .mov</td><td>3840 × 2160</td><td>23.976</td><td>—</td><td>Editor</td></tr>
-            <tr><td>Online (approval)</td><td>H.264 · .mov</td><td>3840 × 2160</td><td>23.976</td><td>20 Mbps</td><td>Frame.io</td></tr>
-            <tr class="matrix__master"><td>Master — Clean</td><td>ProRes 422 HQ · .mov</td><td>3840 × 2160</td><td>23.976</td><td>—</td><td>Frame.io / Dropbox</td></tr>
-            <tr class="matrix__master"><td>Master — Full</td><td>ProRes 422 HQ · .mov</td><td>3840 × 2160</td><td>23.976</td><td>—</td><td>Frame.io / Dropbox</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- ░░ NAMING ░░ -->
-    <section id="naming" class="section">
-      <div class="section__head">
-        <span class="kicker">12 — Suggested</span>
-        <h2>File naming convention</h2>
-        <p class="section__sub">A consistent name tells everyone what a file is at a glance. Suggested standard — adapt the project slug to your job.</p>
-      </div>
-      <div class="naming">
-        <code class="naming__pattern">GFX_<b>ProjectName</b>_<b>STAGE</b>_v<b>NN</b>_<b>YYMMDD</b>.ext</code>
-        <ul class="naming__list">
-          <li><code>GFX_TanakaReef_REVIEW_v03_260605.mov</code></li>
-          <li><code>GFX_TanakaReef_ONLINE_v01_260612.mov</code></li>
-          <li><code>GFX_TanakaReef_AUDIO-AAF_v01_260607.aaf</code></li>
-          <li><code>GFX_TanakaReef_AUDIO-REF_v01_260607.mp4</code></li>
-          <li><code>GFX_TanakaReef_MASTER-CLEAN_v01_260615.mov</code></li>
-          <li><code>GFX_TanakaReef_MASTER-FULL_v01_260615.mov</code></li>
-        </ul>
-        <p class="note">Stages: <code>PROXY · REVIEW · XML · AUDIO-AAF · AUDIO-REF · COLOR · ONLINE · MASTER-CLEAN · MASTER-FULL</code></p>
-      </div>
-    </section>
-
-    <!-- ░░ GLOSSARY ░░ -->
-    <section id="glossary" class="section">
-      <div class="section__head">
-        <span class="kicker">13 — Shared language</span>
-        <h2>Glossary</h2>
-      </div>
-      <dl class="glossary">
-        <div><dt>Proxy</dt><dd>Lightweight, low-bitrate copy of the RAW used for fast editing. Conformed back to RAW for finishing.</dd></div>
-        <div><dt>Picture lock</dt><dd>The edit is final — no more timing or shot changes. Triggers final assets, audio &amp; color.</dd></div>
-        <div><dt>Bug</dt><dd>The persistent Fujifilm logo over the video (hidden over full-res images and the intro).</dd></div>
-        <div><dt>Letterbox</dt><dd>The fixed black bars / matte framing the picture throughout the body.</dd></div>
-        <div><dt>Metadata graphic</dt><dd>PNG overlay riding directly on top of each final image, supplied by the Fuji team.</dd></div>
-        <div><dt>AAF</dt><dd>Advanced Authoring Format — audio interchange carrying separated tracks with embedded clips for sound design.</dd></div>
-        <div><dt>Online / Conform</dt><dd>Reassembling color + audio + graphics at full quality for the approval render.</dd></div>
-        <div><dt>ProRes 422 HQ</dt><dd>High-quality mastering codec used for the color return and both final masters.</dd></div>
-        <div><dt>sRGB</dt><dd>The required color space for all final images. Convert anything else before placing it.</dd></div>
-      </dl>
     </section>
 
     <footer class="foot">
-      <div class="foot__mark"></div>
+      <div class="mark mark--foot"></div>
       <p>Fujifilm <b>GFX Challenge</b> — Post-Production Delivery Standard · v1.0</p>
-      <p class="foot__sub">When in doubt, follow this page. Questions about a spec go to the post-lead before you export.</p>
+      <p class="foot__sub">When in doubt, follow this page. Spec questions go to the post-lead before you export.</p>
     </footer>
 
   </main>

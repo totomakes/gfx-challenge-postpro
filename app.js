@@ -2,6 +2,45 @@
 (function () {
   "use strict";
 
+  /* ---------- Theme toggle ---------- */
+  var root = document.documentElement;
+  function setTheme(t) {
+    root.setAttribute("data-theme", t);
+    try { localStorage.setItem("gfx-theme", t); } catch (e) {}
+  }
+  document.querySelectorAll("[data-theme-toggle]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      setTheme(root.getAttribute("data-theme") === "dark" ? "light" : "dark");
+    });
+  });
+
+  /* ---------- Accordion folds ---------- */
+  document.querySelectorAll("[data-fold]").forEach(function (fold) {
+    var head = fold.querySelector(".fold__head");
+    if (!head) return;
+    head.setAttribute("aria-expanded", "false");
+    head.addEventListener("click", function () {
+      var open = fold.classList.toggle("is-open");
+      head.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+  });
+  // Open a fold when navigated to via hash or in-page link
+  function openFoldFor(hash) {
+    if (!hash) return;
+    var el = document.querySelector(hash);
+    if (!el) return;
+    var fold = el.classList && el.classList.contains("fold") ? el : el.closest(".fold");
+    if (fold && !fold.classList.contains("is-open")) {
+      fold.classList.add("is-open");
+      var h = fold.querySelector(".fold__head");
+      if (h) h.setAttribute("aria-expanded", "true");
+    }
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener("click", function () { openFoldFor(a.getAttribute("href")); });
+  });
+  if (location.hash) { openFoldFor(location.hash); }
+
   /* ---------- Tab cards (Premiere / Resolve) ---------- */
   document.querySelectorAll("[data-tabs]").forEach(function (card) {
     var tabs = card.querySelectorAll(".tabcard__tab");
