@@ -31,7 +31,7 @@ Plus reference sections: **sequence spec**, the **graphics layering stack**, cop
 
 - **Resolution:** 3840 × 2160 (UHD 4K)
 - **Pixel aspect:** Square (1.0)
-- **Frame rate:** 23.976 fps, progressive
+- **Frame rate:** 24 fps, progressive
 - **Review / Online:** 4K H.264 `.mov` @ 20,000 kbps
 - **Audio reference:** 1080p H.264 `.mp4` @ 20,000 kbps
 - **Audio handoff:** AAF with embedded clips (separated tracks)
