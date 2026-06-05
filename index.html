@@ -43,7 +43,6 @@
       <span class="rail__label">Guide</span>
       <a href="#start" data-spy>Start here</a>
       <a href="#spec" data-spy>Core spec</a>
-      <a href="#assets" data-spy>Assets</a>
       <span class="rail__label">The workflow</span>
       <a href="#s-digest" data-spy>01 · Digest</a>
       <a href="#s-edit" data-spy>02 · Edit</a>
@@ -55,6 +54,7 @@
       <a href="#matrix" data-spy>Deliverables</a>
       <a href="#naming" data-spy>Naming</a>
       <a href="#glossary" data-spy>Glossary</a>
+      <a href="#assets" data-spy>Assets &amp; downloads</a>
     </nav>
     <a class="dlbtn" href="assets/GFX_Brand_Assets.zip" download>↓ Download assets</a>
     <button class="themebtn themebtn--rail" data-theme-toggle aria-label="Toggle light / dark theme">
@@ -94,15 +94,9 @@
     <section id="start" class="section">
       <div class="section__head">
         <span class="kicker">Start here</span>
-        <h2>Create the project first</h2>
-        <p class="section__sub">Set everything up <b>before you import a single frame</b>. Build the timeline to the core spec, then bring in the footage so it never inherits a clip’s settings.</p>
+        <h2>Set the timeline to spec</h2>
+        <p class="section__sub">Before importing footage, build your sequence / timeline to the <a href="#spec">core spec</a> — use the exact Premiere Pro or DaVinci Resolve settings below.</p>
       </div>
-
-      <ol class="setup">
-        <li><span class="setup__n">1</span><div><b>Create a new project</b> for the job.</div></li>
-        <li><span class="setup__n">2</span><div><b>Create the sequence / timeline</b> using the core-spec values (4K · square · 24 fps · progressive) — see the exact menu paths below.</div></li>
-        <li><span class="setup__n">3</span><div><b>Only then import the proxies.</b> Never let a dropped clip define the sequence.</div></li>
-      </ol>
 
       <div class="tabcard" data-tabs>
         <div class="tabcard__bar">
@@ -146,49 +140,6 @@
       </div>
     </section>
 
-    <!-- ░░ ASSETS ░░ -->
-    <section id="assets" class="section">
-      <div class="section__head">
-        <span class="kicker">Assets</span>
-        <h2>Download the visual assets</h2>
-        <p class="section__sub">The brand overlays every project uses. Grab the pack, then place them per the rules on each card.</p>
-        <a class="dlbtn dlbtn--inline" href="assets/GFX_Brand_Assets.zip" download>↓ Download all assets (.zip)</a>
-      </div>
-
-      <div class="assetgrid">
-        <div class="assetcard">
-          <div class="assetcard__media"><img src="assets/comp_bug.jpg" alt="Fujifilm bug shown top-left over footage" loading="lazy" /></div>
-          <div class="assetcard__body">
-            <div class="assetcard__top"><h3>Fujifilm bug</h3><a class="dlmini" href="assets/bug.png" download>↓ PNG</a></div>
-            <p>Sits top-left over the whole video. <b>Never over the intro, the end cards, or while images are on screen.</b></p>
-          </div>
-        </div>
-        <div class="assetcard">
-          <div class="assetcard__media"><img src="assets/comp_letterbox.jpg" alt="Letterbox black bars over footage" loading="lazy" /></div>
-          <div class="assetcard__body">
-            <div class="assetcard__top"><h3>Letterbox</h3><a class="dlmini" href="assets/letterbox.png" download>↓ PNG</a></div>
-            <p>Black bars, kept consistently across the body of the film.</p>
-          </div>
-        </div>
-        <div class="assetcard">
-          <div class="assetcard__media"><video src="assets/GFX-CGP25-Intro.mp4" muted loop autoplay playsinline poster="assets/preview_intro.jpg"></video></div>
-          <div class="assetcard__body">
-            <div class="assetcard__top"><h3>Intro sequence</h3><a class="dlmini" href="assets/GFX-CGP25-Intro.mp4" download>↓ MP4</a></div>
-            <p>Plays clean at the very start. <b>No bug over the intro.</b></p>
-          </div>
-        </div>
-        <div class="assetcard">
-          <div class="assetcard__media"><img src="assets/preview_endcard.jpg" alt="End card credits example" loading="lazy" /></div>
-          <div class="assetcard__body">
-            <div class="assetcard__top"><h3>End card <span class="tagmini">per project</span></h3></div>
-            <p>Credits + Fujifilm info, supplied per project. The <b>last frame holds on the end-card text — never cut to black.</b></p>
-          </div>
-        </div>
-      </div>
-
-      <div class="callout callout--bug"><b>Bug placement, in one line:</b> over everything <em>except</em> the intro, the end card(s), and any shot where a full-res image is displayed.</div>
-    </section>
-
     <!-- ░░ THE WORKFLOW ░░ -->
     <section class="section">
       <div class="section__head">
@@ -230,8 +181,17 @@
         </button>
         <div class="fold__wrap"><div class="fold__body">
           <div class="subgroup">
-            <h4 class="subgroup__t"><span class="subgroup__tag">required</span> Status slate at the very start</h4>
-            <p class="subgroup__lead">On <b>every export that is not final / picture-lock</b>, add this card at the absolute beginning. It tells everyone the current post-production stage and project version.</p>
+            <h4 class="subgroup__t"><span class="subgroup__tag">export</span> Review version</h4>
+            <p class="subgroup__lead">For every feedback round. → Frame.io</p>
+            <div class="specline">
+              <code>QuickTime · H.264 · 3840×2160 · 24 fps · VBR 2-pass · 20 Mbps · .mov</code>
+              <button class="copybtn" data-copy="Format: QuickTime | Video Codec: H.264 | 3840x2160 | 24 fps | VBR 2-pass | Target/Max 20 Mbps | .mov">Copy</button>
+            </div>
+            <p class="note">Premiere’s “H.264” format outputs <b>.mp4</b>. For H.264 in a <b>.mov</b>, choose <b>QuickTime</b> → Video Codec H.264. Full steps in <a href="#recipes">Recipe A</a>.</p>
+          </div>
+          <div class="subgroup">
+            <h4 class="subgroup__t"><span class="subgroup__tag">required</span> Status slate — add it last</h4>
+            <p class="subgroup__lead">On <b>every export that is not final / picture-lock</b>, place this card at the absolute beginning of the timeline. It tells everyone the current post-production stage and project version.</p>
             <div class="slate" aria-label="Status slate example">
               <div class="slate__inner">
                 <p>[PHOTOGRAPHER NAME]<br>FUJIFILM GFX CHALLENGE 2025</p>
@@ -245,15 +205,6 @@
               <li><span>Colors</span><code>White #FFFFFF on Black #000000</code></li>
               <li><span>Duration</span><code>5 seconds</code></li>
             </ul>
-          </div>
-          <div class="subgroup">
-            <h4 class="subgroup__t"><span class="subgroup__tag">export</span> Review version</h4>
-            <p class="subgroup__lead">For every feedback round. → Frame.io</p>
-            <div class="specline">
-              <code>QuickTime · H.264 · 3840×2160 · 24 fps · VBR 2-pass · 20 Mbps · .mov</code>
-              <button class="copybtn" data-copy="Format: QuickTime | Video Codec: H.264 | 3840x2160 | 24 fps | VBR 2-pass | Target/Max 20 Mbps | .mov">Copy</button>
-            </div>
-            <p class="note">Premiere’s “H.264” format outputs <b>.mp4</b>. For H.264 in a <b>.mov</b>, choose <b>QuickTime</b> → Video Codec H.264. Full steps in <a href="#recipes">Recipe A</a>.</p>
           </div>
         </div></div>
       </div>
@@ -535,13 +486,26 @@
         </button>
         <div class="fold__wrap"><div class="fold__body">
           <code class="naming__pattern"><b>Date</b>_Fujifilm_GFX_<b>Name</b>_<b>Status</b>_<b>Resolution</b>_<b>Codec</b>.ext</code>
-          <ul class="naming__list">
-            <li><code>260603_Fujifilm_GFX_Jacob_ReviewV3_4K_H264.mov</code></li>
-            <li><code>260603_Fujifilm_GFX_Jacob_Online_4K_H264.mov</code></li>
-            <li><code>260603_Fujifilm_GFX_Jacob_MasterClean_4K_422HQ.mov</code></li>
-            <li><code>260603_Fujifilm_GFX_Jacob_MasterFull_4K_422HQ.mov</code></li>
-          </ul>
-          <p class="note">Date <code>YYMMDD</code> · Status <code>ReviewV#, Online, MasterClean, MasterFull</code> · Resolution <code>4K · 1080p</code> · Codec <code>H264 · 422HQ · AAF</code></p>
+
+          <div class="namegroup">
+            <span class="namegroup__lbl">Review / edit exports</span>
+            <p class="namegroup__hint">Status carries the version — <b>ReviewV1, ReviewV2…</b> — and the codec is <b>H264</b>.</p>
+            <ul class="naming__list">
+              <li><code>260603_Fujifilm_GFX_Jacob_<b>ReviewV3</b>_4K_<b>H264</b>.mov</code></li>
+              <li><code>260603_Fujifilm_GFX_Jacob_<b>ReviewV4</b>_4K_<b>H264</b>.mov</code></li>
+            </ul>
+          </div>
+
+          <div class="namegroup">
+            <span class="namegroup__lbl">Master deliverables</span>
+            <p class="namegroup__hint">Status is the version type — <b>MasterClean</b> or <b>MasterFull</b> — and the codec is <b>422HQ</b>.</p>
+            <ul class="naming__list">
+              <li><code>260603_Fujifilm_GFX_Jacob_<b>MasterClean</b>_4K_<b>422HQ</b>.mov</code></li>
+              <li><code>260603_Fujifilm_GFX_Jacob_<b>MasterFull</b>_4K_<b>422HQ</b>.mov</code></li>
+            </ul>
+          </div>
+
+          <p class="note">Date <code>YYMMDD</code> · Resolution <code>4K · 1080p</code> · Codec <code>H264 · 422HQ · AAF</code></p>
         </div></div>
       </div>
 
@@ -564,6 +528,49 @@
           </dl>
         </div></div>
       </div>
+    </section>
+
+    <!-- ░░ ASSETS ░░ -->
+    <section id="assets" class="section">
+      <div class="section__head">
+        <span class="kicker">Assets &amp; downloads</span>
+        <h2>The visual assets</h2>
+        <p class="section__sub">The brand overlays every project uses. Grab the pack, then place them per the rules on each card.</p>
+        <a class="dlbtn dlbtn--inline" href="assets/GFX_Brand_Assets.zip" download>↓ Download all assets (.zip)</a>
+      </div>
+
+      <div class="assetgrid">
+        <div class="assetcard">
+          <div class="assetcard__media"><img src="assets/comp_bug.jpg" alt="Fujifilm bug shown top-left over footage" loading="lazy" /></div>
+          <div class="assetcard__body">
+            <div class="assetcard__top"><h3>Fujifilm bug</h3><a class="dlmini" href="assets/bug.png" download>↓ PNG</a></div>
+            <p>Sits top-left over the whole video. <b>Never over the intro, the end cards, or while images are on screen.</b></p>
+          </div>
+        </div>
+        <div class="assetcard">
+          <div class="assetcard__media"><img src="assets/comp_letterbox.jpg" alt="Letterbox black bars over footage" loading="lazy" /></div>
+          <div class="assetcard__body">
+            <div class="assetcard__top"><h3>Letterbox</h3><a class="dlmini" href="assets/letterbox.png" download>↓ PNG</a></div>
+            <p>Black bars, kept consistently across the body of the film.</p>
+          </div>
+        </div>
+        <div class="assetcard">
+          <div class="assetcard__media"><video src="assets/GFX-CGP25-Intro.mp4" muted loop autoplay playsinline poster="assets/preview_intro.jpg"></video></div>
+          <div class="assetcard__body">
+            <div class="assetcard__top"><h3>Intro sequence</h3><a class="dlmini" href="assets/GFX-CGP25-Intro.mp4" download>↓ MP4</a></div>
+            <p>Plays clean at the very start. <b>No bug over the intro.</b></p>
+          </div>
+        </div>
+        <div class="assetcard">
+          <div class="assetcard__media"><img src="assets/preview_endcard.jpg" alt="End card credits example" loading="lazy" /></div>
+          <div class="assetcard__body">
+            <div class="assetcard__top"><h3>End card <span class="tagmini">example</span></h3><a class="dlmini" href="assets/endcard-example.mp4" download>↓ MP4</a></div>
+            <p>Credits + Fujifilm info, supplied per project. The <b>last frame holds on the end-card text — never cut to black.</b></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout callout--bug"><b>Bug placement, in one line:</b> over everything <em>except</em> the intro, the end card(s), and any shot where a full-res image is displayed.</div>
     </section>
 
     <footer class="foot">
